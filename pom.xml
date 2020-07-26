@@ -24,7 +24,7 @@
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-lang3.version>3.7</commons-lang3.version>
         <commons-collections4.version>4.1</commons-collections4.version>
-        <hibernatevalidator.version>6.0.2.Final</hibernatevalidator.version>
+        <hibernatevalidator.version>6.1.0.Final</hibernatevalidator.version>
         <mybatis-plus-boot-starter.version>3.1.0</mybatis-plus-boot-starter.version>
         <spring-boot-maven-plugin.version>2.1.2.RELEASE</spring-boot-maven-plugin.version>
         <commons-text.version>1.6</commons-text.version>
