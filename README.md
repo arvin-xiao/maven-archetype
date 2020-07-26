@@ -1,0 +1,2 @@
+# maven-archetype
+通过maven自定义maven项目骨架,创建archetype后在idea中添加骨架，构建新项目使用maven骨架并一键生成固定项目结构及初始文件
