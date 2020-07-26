@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true">
     <!-- 服务名 -->
-    <property name="app.name" value="information-center" />
+    <property name="app.name" value="medsci-framework" />
     <!-- 日志输出上下文名称 -->
     <contextName>${app.name}</contextName>
     <!-- 输出日志到控制台 ConsoleAppender -->
