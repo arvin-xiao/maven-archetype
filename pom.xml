@@ -201,14 +201,14 @@
     <!--发布到私服配置-->
     <distributionManagement>
         <repository>
-            <id>jtl-release</id>
-            <name>Jtl Release</name>
-            <url>http://172.21.202.164:18881/repository/jtl-repository-release/</url>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>http://192.168.0.243:8081/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
-            <id>jtl-snapshot</id>
-            <name>Jtl Snapshots</name>
-            <url>http://172.21.202.164:18881/repository/jtl-repository-snapshot/</url>
+            <id>snapshots</id>
+            <name>Snapshot</name>
+            <url>http://192.168.0.243:8081/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
