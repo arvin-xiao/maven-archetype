@@ -198,4 +198,17 @@
         </plugins>
     </build>
 
+    <!--发布到私服配置-->
+    <distributionManagement>
+        <repository>
+            <id>jtl-release</id>
+            <name>Jtl Release</name>
+            <url>http://172.21.202.164:18881/repository/jtl-repository-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>jtl-snapshot</id>
+            <name>Jtl Snapshots</name>
+            <url>http://172.21.202.164:18881/repository/jtl-repository-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
