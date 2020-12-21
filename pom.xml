@@ -29,7 +29,7 @@
         <spring-boot-maven-plugin.version>2.1.2.RELEASE</spring-boot-maven-plugin.version>
         <commons-text.version>1.6</commons-text.version>
         <java-uuid-generator.version>3.1.5</java-uuid-generator.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <apm-servicecomb-java-chassis-1.x-plugin.version>6.1.0</apm-servicecomb-java-chassis-1.x-plugin.version>
         <!--starter的版本控制-->
