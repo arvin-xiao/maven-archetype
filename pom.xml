@@ -39,6 +39,9 @@
         <velocity.version>1.7</velocity.version>
         <lombok.version>1.18.6</lombok.version>
         <springfox-swagger2.version>2.8.0</springfox-swagger2.version>
+        <docker.host>http://47.103.69.216:2375</docker.host>
+        <docker.image.prefix>medsci</docker.image.prefix>
+        <docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
     </properties>
 
     <!--SpringBoot 版本控制-->
@@ -187,8 +190,130 @@
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker.maven.plugin.version}</version>
+                    <configuration>
+                        <imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
+                        <dockerHost>${docker.host}</dockerHost>
+                        <baseImage>openjdk:8-jre-alpine</baseImage>
+                        <entryPoint>["java", "-jar", "-Dspring.profiles.active=dev","${project.build.finalName}.jar"]
+                        </entryPoint>
+                        <resources>
+                            <resource>
+                                <targetPath>/</targetPath>
+                                <directory>${project.build.directory}</directory>
+                                <include>${project.build.finalName}.jar</include>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>1.3.0</version>
+                    <configuration>
+                        <!--from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字-->
+                        <from>
+                            <!--使用openjdk官方镜像-->
+                            <image>openjdk:8-jre-alpine</image>
+                        </from>
+                        <to>
+                            <!--镜像名称和tag，使用了mvn内置变量${project.version}，表示当前工程的version-->
+                            <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
+                        </to>
+                        <!--容器相关的属性-->
+                        <container>
+                            <!--jvm内存参数-->
+                            <jvmFlags>
+                                <jvmFlag>-Xms512m</jvmFlag>
+                                <jvmFlag>-Xmx512m</jvmFlag>
+                            </jvmFlags>
+                            <!--要暴露的端口-->
+                            <ports>
+                                <port>80</port>
+                            </ports>
+                            <useCurrentTimestamp>true</useCurrentTimestamp>
+                        </container>
+                        <allowInsecureRegistries>true</allowInsecureRegistries>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>dockerBuild</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--数据库文档插件-->
+                <plugin>
+                    <groupId>cn.smallbun.screw</groupId>
+                    <artifactId>screw-maven-plugin</artifactId>
+                    <version>1.0.5</version>
+                    <dependencies>
+                        <!-- HikariCP -->
+                        <dependency>
+                            <groupId>com.zaxxer</groupId>
+                            <artifactId>HikariCP</artifactId>
+                            <version>3.4.5</version>
+                        </dependency>
+                        <!--mysql driver-->
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>8.0.20</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <!--username-->
+                        <username>root</username>
+                        <!--password-->
+                        <password>root</password>
+                        <!--driver-->
+                        <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+                        <!--jdbc url-->
+                        <jdbcUrl>jdbc:mysql://127.0.0.1:3306/sys</jdbcUrl>
+                        <!--生成文件类型-->
+                        <fileType>HTML</fileType>
+                        <!--打开文件输出目录-->
+                        <openOutputDir>false</openOutputDir>
+                        <!--生成模板-->
+                        <produceType>freemarker</produceType>
+                        <!--文档名称 为空时:将采用[数据库名称-描述-版本号]作为文档名称-->
+                        <fileName>数据库文档</fileName>
+                        <!--描述-->
+                        <description>MySQL数据库文档</description>
+                        <!--版本-->
+                        <version>${project.version}</version>
+                        <!--标题-->
+                        <title>数据库文档</title>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
+
         <!--Maven自定义Archetype插件-->
         <plugins>
             <plugin>
@@ -203,12 +328,12 @@
         <repository>
             <id>releases</id>
             <name>Releases</name>
-            <url>http://192.168.0.243:8081/nexus/content/repositories/releases/</url>
+            <url>http://10.0.0.250:8081/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>Snapshot</name>
-            <url>http://192.168.0.243:8081/nexus/content/repositories/snapshots/</url>
+            <url>http://10.0.0.250:8081/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>

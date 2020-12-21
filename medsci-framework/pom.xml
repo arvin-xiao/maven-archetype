@@ -84,6 +84,7 @@
                     <exclude>*.properties</exclude>
                     <exclude>*.yml</exclude>
                     <exclude>*.xml</exclude>
+                    <exclude>*.yaml</exclude>
                 </excludes>
                 <filtering>true</filtering>
             </resource>
@@ -92,13 +93,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
             </plugin>
-
             <!--利用maven-jar-plugin插件打jar包 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -120,12 +115,13 @@
                     <excludes>
                         <exclude>*.properties</exclude>
                         <exclude>*.yml</exclude>
+                        <exclude>*.yaml</exclude>
                         <exclude>*.xml</exclude>
                         <exclude>config/**</exclude>
                     </excludes>
                 </configuration>
-
             </plugin>
+
             <!--设置jar所依赖的三方jar包存放的路径 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -170,55 +166,21 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+            </plugin>
+            <!--数据库文档插件-->
+            <plugin>
                 <groupId>cn.smallbun.screw</groupId>
                 <artifactId>screw-maven-plugin</artifactId>
-                <version>1.0.5</version>
-                <dependencies>
-                    <!-- HikariCP -->
-                    <dependency>
-                        <groupId>com.zaxxer</groupId>
-                        <artifactId>HikariCP</artifactId>
-                        <version>3.4.5</version>
-                    </dependency>
-                    <!--mysql driver-->
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>8.0.20</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <!--username-->
-                    <username>root</username>
-                    <!--password-->
-                    <password>root</password>
-                    <!--driver-->
-                    <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
-                    <!--jdbc url-->
-                    <jdbcUrl>jdbc:mysql://127.0.0.1:3306/sys</jdbcUrl>
-                    <!--生成文件类型-->
-                    <fileType>HTML</fileType>
-                    <!--打开文件输出目录-->
-                    <openOutputDir>false</openOutputDir>
-                    <!--生成模板-->
-                    <produceType>freemarker</produceType>
-                    <!--文档名称 为空时:将采用[数据库名称-描述-版本号]作为文档名称-->
-                    <fileName>数据库文档</fileName>
-                    <!--描述-->
-                    <description>MySQL数据库文档</description>
-                    <!--版本-->
-                    <version>${project.version}</version>
-                    <!--标题-->
-                    <title>数据库文档</title>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

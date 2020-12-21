@@ -64,7 +64,7 @@ public class UserController {
             }
             return response;
         } catch (Exception e) {
-            log.error("新增用户失败:{}",e.getMessage());
+            log.error("新增用户失败:{}", e.getMessage());
             return response.setStatus(ResultStatus.ERROR.getCode()).setMessage("新增用户失败!");
         }
     }
@@ -85,7 +85,7 @@ public class UserController {
             }
             return response.setData(data);
         } catch (Exception e) {
-            log.error("根据用户id获取详情失败:{}",e.getMessage());
+            log.error("根据用户id获取详情失败:{}", e.getMessage());
             return response.setStatus(ResultStatus.ERROR.getCode()).setMessage("根据用户id获取详情失败!");
         }
     }
@@ -106,7 +106,7 @@ public class UserController {
             }
             return response.setTotalSize(page.getTotal()).setData(page.getRecords());
         } catch (Exception e) {
-            log.error("查询用户分页失败:{}",e.getMessage());
+            log.error("查询用户分页失败:{}", e.getMessage());
             return response.setStatus(ResultStatus.ERROR.getCode()).setMessage("查询用户分页失败!");
         }
     }
@@ -127,7 +127,7 @@ public class UserController {
             }
             return response;
         } catch (Exception e) {
-            log.error("修改用户失败:{}",e.getMessage());
+            log.error("修改用户失败:{}", e.getMessage());
             return response.setStatus(ResultStatus.ERROR.getCode()).setMessage("修改用户失败!");
         }
     }
@@ -148,7 +148,7 @@ public class UserController {
             }
             return response;
         } catch (Exception e) {
-            log.error("用户批量处理失败:{}",e.getMessage());
+            log.error("用户批量处理失败:{}", e.getMessage());
             return response.setStatus(ResultStatus.ERROR.getCode()).setMessage("用户批量处理失败!");
         }
     }

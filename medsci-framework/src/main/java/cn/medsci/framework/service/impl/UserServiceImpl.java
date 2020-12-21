@@ -28,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Integer saveUser(SaveUserRequest request) {
         User u = new User();
-        BeanUtils.copyProperties(request,u);
+        BeanUtils.copyProperties(request, u);
         return baseMapper.insert(u);
     }
 
@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public GetUserByIdResponse getUserById(GetUserByIdRequest request) {
         GetUserByIdResponse data = new GetUserByIdResponse();
         User user = baseMapper.selectById(request.getId());
-        BeanUtils.copyProperties(user,data);
+        BeanUtils.copyProperties(user, data);
         return data;
     }
 
@@ -46,10 +46,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Page<User> page = new Page<>(request.getPageIndex(), request.getPageSize());
         IPage<User> selectPage = baseMapper.selectPage(page, null);
         List<GetUserPageResponse> records = new ArrayList<>();
-        if(CollectionUtils.isNotEmpty(selectPage.getRecords())){
+        if (CollectionUtils.isNotEmpty(selectPage.getRecords())) {
             for (User u : selectPage.getRecords()) {
                 GetUserPageResponse item = new GetUserPageResponse();
-                BeanUtils.copyProperties(u,item);
+                BeanUtils.copyProperties(u, item);
                 records.add(item);
             }
         }
@@ -59,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Integer updateUser(UpdateUserByIdRequest request) {
         User user = baseMapper.selectById(request.getId());
-        BeanUtils.copyProperties(user,request);
+        BeanUtils.copyProperties(user, request);
         return baseMapper.updateById(user);
     }
 
