@@ -20,7 +20,7 @@
 
         <medsci.project.version>1.0-SNAPSHOT</medsci.project.version>
         <druid.version>1.1.10</druid.version>
-        <fastjson.version>1.2.68</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-lang3.version>3.7</commons-lang3.version>
         <commons-collections4.version>4.1</commons-collections4.version>
