@@ -35,7 +35,7 @@
         <!--starter的版本控制-->
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <alibaba-cloud.version>2.2.0.RELEASE</alibaba-cloud.version>
-        <mysql.version>8.0.16</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <velocity.version>1.7</velocity.version>
         <lombok.version>1.18.6</lombok.version>
         <springfox-swagger2.version>2.8.0</springfox-swagger2.version>
@@ -275,7 +275,7 @@
                         <dependency>
                             <groupId>mysql</groupId>
                             <artifactId>mysql-connector-java</artifactId>
-                            <version>8.0.20</version>
+                            <version>8.0.28</version>
                         </dependency>
                     </dependencies>
                     <configuration>
